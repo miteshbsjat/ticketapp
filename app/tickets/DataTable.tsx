@@ -14,7 +14,6 @@ interface Props {
 }
 
 const DataTable = ({ tickets }: Props) => {
-  //   console.log(tickets);
   return (
     <div className="w-full mt-5">
       <div className="rounded-md sm:border">
@@ -36,7 +35,14 @@ const DataTable = ({ tickets }: Props) => {
                     <TableCell> {ticket.priority} </TableCell>
                     <TableCell>
                       {" "}
-                      {ticket.createdAt.toLocaleDateString()}{" "}
+                      {ticket.createdAt.toLocaleDateString("en-US", {
+                        year: "2-digit",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true,
+                      })}{" "}
                     </TableCell>
                   </TableRow>
                 ))
