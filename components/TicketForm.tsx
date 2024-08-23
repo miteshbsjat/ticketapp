@@ -1,5 +1,5 @@
 "use client"; // need to interact with client
-import React from "react";
+import React, { useState } from "react";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { z } from "zod";
 import { ticketSchema } from "@/ValidationSchemas/ticket";
@@ -15,15 +15,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
+import { Button } from "./ui/button";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 type TicketFormData = z.infer<typeof ticketSchema>;
 
 const TicketForm = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
+
   const form = useForm<TicketFormData>({
     resolver: zodResolver(ticketSchema),
   });
   async function onSubmit(values: z.infer<typeof ticketSchema>) {
-    console.log(values);
+    try {
+      setIsSubmitting(true);
+      setError("");
+
+      await axios.post("/api/tickets", values);
+      setIsSubmitting(false); // set to false when leaving this pages
+      router.push("/tickets");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+      setError("Unknown Error Occurred");
+      setIsSubmitting(false);
+    }
   }
   return (
     <div className="rounded-md border w-full p-4">
@@ -102,6 +121,9 @@ const TicketForm = () => {
               )}
             ></FormField>
           </div>
+          <Button type="submit" disabled={isSubmitting}>
+            Submit
+          </Button>
         </form>
       </Form>
     </div>
