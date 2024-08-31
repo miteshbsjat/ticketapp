@@ -53,7 +53,7 @@ const TicketDetail = ({ ticket }: Props) => {
           })}
         </CardFooter>
       </Card>
-      <div>
+      <div className="mx-4 flex lg:flex-col lg:mx-0 gap-2">
         <Link
           href={`/tickets/edit/${ticket.id}`}
           className={`${buttonVariants({
@@ -61,6 +61,15 @@ const TicketDetail = ({ ticket }: Props) => {
           })}`}
         >
           Edit Ticket
+        </Link>
+
+        <Link
+          href={`/tickets/edit/${ticket.id}`}
+          className={`${buttonVariants({
+            variant: "default",
+          })}`}
+        >
+          Delete Ticket
         </Link>
       </div>
     </div>
