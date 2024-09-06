@@ -20,7 +20,22 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
   const page = parseInt(searchParams.page) || 1;
   const ticketCount = await prisma.ticket.count();
   const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+
+  let where = {};
+
+  if (status) {
+    where = { status };
+  } else {
+    where = {
+      NOT: [{ status: "CLOSED" as Status }],
+    };
+  }
+
   const tickets = await prisma.ticket.findMany({
+    where,
     take: pageSize,
     skip: (page - 1) * pageSize,
   });
