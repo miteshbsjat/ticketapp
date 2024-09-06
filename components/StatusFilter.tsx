@@ -1,3 +1,4 @@
+"use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import {
@@ -10,7 +11,7 @@ import {
 } from "./ui/select";
 
 const statuses: { label: string; value?: string }[] = [
-  { label: "Open / Started" },
+  { label: "Open / Started", value: "DUMMY" },
   { label: "Open", value: "OPEN" },
   { label: "Started", value: "STARTED" },
   { label: "Closed", value: "CLOSED" },

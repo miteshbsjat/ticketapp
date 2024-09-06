@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React from "react";
 
 import prisma from "@/prisma/db";
@@ -7,8 +7,10 @@ import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import Pagination from "@/components/Pagination";
 import StatusFilter from "@/components/StatusFilter";
+import { Status } from "@prisma/client";
 
 interface SearchParams {
+  status: Status;
   page: string;
 }
 
@@ -17,6 +19,7 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
 
   const page = parseInt(searchParams.page) || 1;
   const ticketCount = await prisma.ticket.count();
+  const statuses = Object.values(Status);
   const tickets = await prisma.ticket.findMany({
     take: pageSize,
     skip: (page - 1) * pageSize,
