@@ -42,13 +42,15 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
 
   return (
     <div>
-      <Link
-        href="/tickets/new"
-        className={buttonVariants({ variant: "default" })}
-      >
-        New Ticket
-      </Link>
-      <StatusFilter />
+      <div className="flex gap-2">
+        <Link
+          href="/tickets/new"
+          className={buttonVariants({ variant: "default" })}
+        >
+          New Ticket
+        </Link>
+        <StatusFilter />
+      </div>
       <DataTable tickets={tickets} />
       <Pagination
         itemCount={ticketCount}
