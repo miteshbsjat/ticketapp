@@ -18,7 +18,6 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
   const pageSize = 10;
 
   const page = parseInt(searchParams.page) || 1;
-  const ticketCount = await prisma.ticket.count();
   const statuses = Object.values(Status);
   const status = statuses.includes(searchParams.status)
     ? searchParams.status
@@ -34,6 +33,7 @@ const Tickets = async ({ searchParams }: { searchParams: SearchParams }) => {
     };
   }
 
+  const ticketCount = await prisma.ticket.count({ where });
   const tickets = await prisma.ticket.findMany({
     where,
     take: pageSize,
