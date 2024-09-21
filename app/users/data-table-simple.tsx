@@ -21,7 +21,7 @@ const DataTableSimple = ({ users }: Props) => {
       <div className="rounded-md sm:border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="bg-secondary hover:bg-secondary">
               <TableHead className="font-medium">Name</TableHead>
               <TableHead className="font-medium">Username</TableHead>
               <TableHead className="font-medium">Role</TableHead>
