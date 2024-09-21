@@ -19,7 +19,13 @@ const AssignTicket = ({ ticket, users }: { ticket: Ticket; users: User[] }) => {
   const assignTicket = async (userId: string) => {
     setError("");
     setIsAssigning(true);
-
+    await axios
+      .patch(`/api/tickets/${ticket.id}`, {
+        assignedToUserId: userId === "0" ? null : userId,
+      })
+      .catch(() => {
+        setError("Unable to Assign Ticket");
+      });
     setIsAssigning(false);
   };
 
