@@ -32,7 +32,7 @@ const DataTableSimple = ({ users }: Props) => {
               ? users.map((user) => (
                   <TableRow key={user.id} data-href="/">
                     <TableCell>
-                      <Link href={`/users/${user.id}`}>{user.id}</Link>
+                      <Link href={`/users/${user.id}`}>{user.name}</Link>
                     </TableCell>
                     <TableCell>
                       <Link href={`/users/${user.id}`}>{user.username}</Link>
